@@ -10,12 +10,14 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.adematici.pharmaciesonduty.R
 import com.adematici.pharmaciesonduty.databinding.FragmentSplashBinding
+import com.adematici.pharmaciesonduty.util.SharedPref
 
 class SplashFragment : Fragment() {
 
     private var _binding: FragmentSplashBinding? = null
     private val binding get() = _binding!!
     private val SPLASH_TIME = 2500L
+    private lateinit var sharedPref: SharedPref
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +31,15 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sharedPref = SharedPref(requireContext())
+
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashFragment_to_showPharmacyFragment)
+            if (sharedPref.getSplashState()){
+                findNavController().navigate(R.id.action_splashFragment_to_showPharmacyFragment)
+            } else {
+                sharedPref.setSplashState(true)
+                findNavController().navigate(R.id.action_splashFragment_to_selectLocationFragment)
+            }
         },SPLASH_TIME)
     }
 

@@ -13,7 +13,7 @@ interface PharmacyAPI {
         @Query("il") province: String,
         @Query("ilce") district: String,
         @Header("content-type") type: String = "application/json",
-        @Header("authorization") key: String = "apikey 35DLibwgoNJgVrQUS8iTCe:3OMCsY3QIIACIXl57szjwa" // apikey
+        @Header("authorization") key: String = "" // apikey
     ): Response<PharmacyModel>
 
 }
