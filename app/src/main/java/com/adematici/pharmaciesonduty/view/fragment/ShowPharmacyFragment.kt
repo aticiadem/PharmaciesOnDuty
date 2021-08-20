@@ -38,6 +38,12 @@ class ShowPharmacyFragment : Fragment() {
         binding.toolbar.inflateMenu(R.menu.top_bar_menu)
         mySharedPref = SharedPref(requireContext())
 
+        val province = mySharedPref.getLocationProvince()
+        val district = mySharedPref.getLocationDistrict()
+        val title = "$province - $district"
+
+        binding.toolbar.title = title
+
         binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_settings_button -> {
@@ -47,9 +53,6 @@ class ShowPharmacyFragment : Fragment() {
                 else -> false
             }
         }
-
-        val province = mySharedPref.getLocationProvince()
-        val district = mySharedPref.getLocationDistrict()
 
         viewModel = ViewModelProvider(requireActivity()).get(ShowParmacyViewModel::class.java)
         viewModel.getPharmacyData(province,district)

@@ -13,6 +13,6 @@ class PharmacyAPIService {
         .build().create(PharmacyAPI::class.java)
 
     suspend fun getData(province: String, district: String): Response<PharmacyModel> {
-        return api.getPharmacy(province,district)
+        return api.getPharmacy(province.lowercase(),district.lowercase())
     }
 }

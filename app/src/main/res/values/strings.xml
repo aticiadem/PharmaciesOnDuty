@@ -4,4 +4,8 @@
     <string name="content_description">image</string>
     <string name="error_message">Error, Try Again!</string>
     <string name="settings">Ayarlar</string>
+    <string name="province">Şehir</string>
+    <string name="confirm">Onayla</string>
+    <string name="district">İlçe</string>
+    <string name="do_not_blank">Boşlukları Doldurunuz!</string>
 </resources>
