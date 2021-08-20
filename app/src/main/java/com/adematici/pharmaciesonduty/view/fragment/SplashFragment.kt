@@ -30,7 +30,7 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashFragment_to_selectLocationFragment)
+            findNavController().navigate(R.id.action_splashFragment_to_showPharmacyFragment)
         },SPLASH_TIME)
     }
 
