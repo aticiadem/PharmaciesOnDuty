@@ -1,11 +1,13 @@
 package com.adematici.pharmaciesonduty.view.fragment
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import com.adematici.pharmaciesonduty.R
 import com.adematici.pharmaciesonduty.adapter.PharmacyAdapter
 import com.adematici.pharmaciesonduty.databinding.FragmentShowPharmacyBinding
 import com.adematici.pharmaciesonduty.model.Result
@@ -30,6 +32,18 @@ class ShowPharmacyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+        binding.toolbar.inflateMenu(R.menu.top_bar_menu)
+
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_settings_button -> {
+                    findNavController().navigate(R.id.action_showPharmacyFragment_to_selectLocationFragment)
+                    true
+                }
+                else -> false
+            }
+        }
 
         viewModel = ViewModelProvider(requireActivity()).get(ShowParmacyViewModel::class.java)
         viewModel.getPharmacyData("Adana","Seyhan")
@@ -70,6 +84,10 @@ class ShowPharmacyFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.top_bar_menu,menu)
     }
 
     override fun onDestroyView() {
