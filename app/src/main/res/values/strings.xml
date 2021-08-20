@@ -2,4 +2,5 @@
     <string name="app_name">PharmaciesOnDuty</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="content_description">image</string>
+    <string name="error_message">Error, Try Again!</string>
 </resources>

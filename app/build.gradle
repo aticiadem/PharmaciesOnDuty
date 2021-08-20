@@ -52,7 +52,6 @@ dependencies {
     def coroutines_version = "1.5.0"
     def room_version = "2.3.0"
     def retrofitVersion = '2.9.0'
-    def rxJavaVersion = '2.1.1'
     def lifeCycleExtensionVersion = '1.1.1'
     def preference_version = "1.1.1"
 
@@ -76,9 +75,6 @@ dependencies {
     // Retrofit - RxJava
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
-    implementation "io.reactivex.rxjava2:rxjava:2.2.8"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'

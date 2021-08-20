@@ -1,6 +1,5 @@
 package com.adematici.pharmaciesonduty.model
 
-
 import com.google.gson.annotations.SerializedName
 
 data class Result(

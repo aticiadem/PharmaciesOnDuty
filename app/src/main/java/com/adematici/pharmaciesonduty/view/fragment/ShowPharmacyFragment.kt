@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.adematici.pharmaciesonduty.adapter.PharmacyAdapter
 import com.adematici.pharmaciesonduty.databinding.FragmentShowPharmacyBinding
 import com.adematici.pharmaciesonduty.model.Result
+import com.adematici.pharmaciesonduty.viewmodel.ShowParmacyViewModel
 
 class ShowPharmacyFragment : Fragment() {
 
@@ -15,6 +17,7 @@ class ShowPharmacyFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var pharmacyAdapter: PharmacyAdapter
     private lateinit var pharmacyList: ArrayList<Result>
+    private lateinit var viewModel: ShowParmacyViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,15 +32,48 @@ class ShowPharmacyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         pharmacyList = ArrayList()
+        viewModel = ViewModelProvider(requireActivity()).get(ShowParmacyViewModel::class.java)
+        viewModel.getPharmacyData("Kocaeli","izmit")
 
-        val x = Result("adres","dist","loc","name","phone")
-        val y = Result("adres","dist","loc","name","phone")
-        pharmacyList.add(x)
-        pharmacyList.add(y)
+        observeLiveData()
+    }
 
-        pharmacyAdapter = PharmacyAdapter(pharmacyList)
-
-        binding.recyclerView.adapter = pharmacyAdapter
+    private fun observeLiveData() {
+        viewModel.variables.observe(viewLifecycleOwner,{ data ->
+            data?.let {
+                pharmacyList.clear()
+                for (i in it){
+                    pharmacyList.add(i)
+                }
+                pharmacyAdapter = PharmacyAdapter(pharmacyList)
+                binding.recyclerView.adapter = pharmacyAdapter
+                binding.textViewError.visibility = View.INVISIBLE
+                binding.progressBar.visibility = View.INVISIBLE
+                binding.recyclerView.visibility = View.VISIBLE
+            }
+        })
+        viewModel.progressBarState.observe(viewLifecycleOwner,{ state ->
+            state?.let {
+                if (it){
+                    binding.textViewError.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.GONE
+                } else {
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        })
+        viewModel.errorMessageState.observe(viewLifecycleOwner,{ state ->
+            state?.let {
+                if (it){
+                    binding.textViewError.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                    binding.recyclerView.visibility = View.GONE
+                } else {
+                    binding.textViewError.visibility = View.GONE
+                }
+            }
+        })
     }
 
     override fun onDestroyView() {
