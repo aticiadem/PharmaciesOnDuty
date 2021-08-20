@@ -16,7 +16,7 @@ class ShowPharmacyFragment : Fragment() {
     private var _binding: FragmentShowPharmacyBinding? = null
     private val binding get() = _binding!!
     private lateinit var pharmacyAdapter: PharmacyAdapter
-    private lateinit var pharmacyList: ArrayList<Result>
+    private lateinit var pharmacyList: List<Result>
     private lateinit var viewModel: ShowParmacyViewModel
 
     override fun onCreateView(
@@ -31,9 +31,8 @@ class ShowPharmacyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pharmacyList = ArrayList()
         viewModel = ViewModelProvider(requireActivity()).get(ShowParmacyViewModel::class.java)
-        viewModel.getPharmacyData("Kocaeli","izmit")
+        viewModel.getPharmacyData("Adana","Seyhan")
 
         observeLiveData()
     }
@@ -41,10 +40,7 @@ class ShowPharmacyFragment : Fragment() {
     private fun observeLiveData() {
         viewModel.variables.observe(viewLifecycleOwner,{ data ->
             data?.let {
-                pharmacyList.clear()
-                for (i in it){
-                    pharmacyList.add(i)
-                }
+                pharmacyList = it
                 pharmacyAdapter = PharmacyAdapter(pharmacyList)
                 binding.recyclerView.adapter = pharmacyAdapter
                 binding.textViewError.visibility = View.INVISIBLE

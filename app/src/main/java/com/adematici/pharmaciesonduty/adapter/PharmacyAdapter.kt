@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adematici.pharmaciesonduty.databinding.PharmacyRecyclerRowBinding
 import com.adematici.pharmaciesonduty.model.Result
 
-class PharmacyAdapter(private val pharmacyList: ArrayList<Result>): RecyclerView.Adapter<PharmacyAdapter.PharmacyViewHolder>() {
+class PharmacyAdapter(private val pharmacyList: List<Result>): RecyclerView.Adapter<PharmacyAdapter.PharmacyViewHolder>() {
 
     inner class PharmacyViewHolder(val itemBinding: PharmacyRecyclerRowBinding)
         : RecyclerView.ViewHolder(itemBinding.root)
@@ -17,7 +17,8 @@ class PharmacyAdapter(private val pharmacyList: ArrayList<Result>): RecyclerView
     }
 
     override fun onBindViewHolder(holder: PharmacyViewHolder, position: Int) {
-        holder.itemBinding.cardPharmacyName.text = pharmacyList[position].name
+        val pharmacy = pharmacyList[position].name + " ECZANESI"
+        holder.itemBinding.cardPharmacyName.text = pharmacy
         holder.itemBinding.cardTextAddress.text = pharmacyList[position].address
         holder.itemBinding.cardTextPhone.text = pharmacyList[position].phone
     }
