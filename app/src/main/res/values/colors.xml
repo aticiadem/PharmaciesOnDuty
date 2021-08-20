@@ -10,4 +10,16 @@
     <color name="animation_green">#38c172</color>
     <color name="green">#00FF00</color>
     <color name="green_dark">#006400</color>
+    <color name="red">#FF0000</color>
+    <color name="gray">#EDEDED</color>
+    <color name="black_low">#232323</color>
+
+    <color name="text_color_white">@color/white</color>
+    <color name="background_color">@color/gray</color>
+    <color name="recycler_view_card_background">@color/white</color>
+    <color name="recycler_view_title_text_color">@color/red</color>
+    <color name="recycler_view_subtitle_text_color">@color/black</color>
+    <color name="edit_text_hint_text_color">@color/black_low</color>
+    <color name="edit_text_text_color">@color/black</color>
+
 </resources>

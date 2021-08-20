@@ -5,7 +5,9 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33489583333333334" />
         <entry key="app/src/main/res/layout/fragment_select_location.xml" value="0.33489583333333334" />
+        <entry key="app/src/main/res/layout/fragment_show_pharmacy.xml" value="0.33489583333333334" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.33489583333333334" />
+        <entry key="app/src/main/res/layout/pharmacy_recycler_row.xml" value="0.33489583333333334" />
       </map>
     </option>
   </component>

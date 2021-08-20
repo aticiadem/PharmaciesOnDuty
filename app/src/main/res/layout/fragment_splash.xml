@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/animation_green"
     android:gravity="center"
-    tools:context=".SplashFragment">
+    tools:context=".view.fragment.SplashFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimation"

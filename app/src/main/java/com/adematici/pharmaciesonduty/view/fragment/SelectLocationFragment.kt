@@ -1,4 +1,4 @@
-package com.adematici.pharmaciesonduty
+package com.adematici.pharmaciesonduty.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
