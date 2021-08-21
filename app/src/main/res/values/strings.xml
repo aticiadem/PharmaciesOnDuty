@@ -8,4 +8,8 @@
     <string name="confirm">Onayla</string>
     <string name="district">İlçe</string>
     <string name="do_not_blank">Boşlukları Doldurunuz!</string>
+    <string name="location">Location</string>
+    <string name="permission_request">Konum İznini Vermelisiniz</string>
+    <string name="give_permission">İzin Ver</string>
+    <string name="permission_needed">İzne ihtiyaç var.</string>
 </resources>

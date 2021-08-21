@@ -9,7 +9,9 @@
         <entry key="app/src/main/res/layout/fragment_show_pharmacy.xml" value="0.33489583333333334" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.33489583333333334" />
         <entry key="app/src/main/res/layout/pharmacy_recycler_row.xml" value="0.33489583333333334" />
+        <entry key="app/src/main/res/menu/map_menu.xml" value="0.33489583333333334" />
         <entry key="app/src/main/res/menu/maps_menu.xml" value="0.33489583333333334" />
+        <entry key="app/src/main/res/menu/show_parmacy_menu.xml" value="0.33489583333333334" />
         <entry key="app/src/main/res/menu/topbar_menu.xml" value="0.33489583333333334" />
       </map>
     </option>
