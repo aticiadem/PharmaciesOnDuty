@@ -38,5 +38,16 @@
         <action
             android:id="@+id/action_showPharmacyFragment_to_selectLocationFragment"
             app:destination="@id/selectLocationFragment" />
+        <action
+            android:id="@+id/action_showPharmacyFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.adematici.pharmaciesonduty.view.fragment.MapsFragment"
+        android:label="MapsFragment" >
+        <argument
+            android:name="currentItem"
+            app:argType="com.adematici.pharmaciesonduty.model.Result" />
     </fragment>
 </navigation>

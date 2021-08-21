@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.adematici.pharmaciesonduty.R
 import com.adematici.pharmaciesonduty.adapter.PharmacyAdapter
 import com.adematici.pharmaciesonduty.databinding.FragmentShowPharmacyBinding
@@ -35,7 +33,7 @@ class ShowPharmacyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        binding.toolbar.inflateMenu(R.menu.top_bar_menu)
+        binding.toolbar.inflateMenu(R.menu.show_parmacy_menu)
         mySharedPref = SharedPref(requireContext())
 
         val province = mySharedPref.getLocationProvince()
@@ -64,7 +62,7 @@ class ShowPharmacyFragment : Fragment() {
         viewModel.variables.observe(viewLifecycleOwner,{ data ->
             data?.let {
                 pharmacyList = it
-                pharmacyAdapter = PharmacyAdapter(pharmacyList)
+                pharmacyAdapter = PharmacyAdapter(pharmacyList,this)
                 binding.recyclerView.adapter = pharmacyAdapter
                 binding.textViewError.visibility = View.INVISIBLE
                 binding.progressBar.visibility = View.INVISIBLE
@@ -96,7 +94,7 @@ class ShowPharmacyFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.top_bar_menu,menu)
+        inflater.inflate(R.menu.show_parmacy_menu,menu)
     }
 
     override fun onDestroyView() {

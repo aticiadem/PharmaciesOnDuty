@@ -33,7 +33,6 @@ class ShowParmacyViewModel: ViewModel() {
                         errorMessageState.value = false
                     }
                 } else {
-                    println(response.errorBody())
                     progressBarState.value = false
                     errorMessageState.value = true
                 }
