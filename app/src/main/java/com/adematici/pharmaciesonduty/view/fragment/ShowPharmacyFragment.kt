@@ -10,7 +10,7 @@ import com.adematici.pharmaciesonduty.adapter.PharmacyAdapter
 import com.adematici.pharmaciesonduty.databinding.FragmentShowPharmacyBinding
 import com.adematici.pharmaciesonduty.model.Result
 import com.adematici.pharmaciesonduty.util.SharedPref
-import com.adematici.pharmaciesonduty.viewmodel.ShowParmacyViewModel
+import com.adematici.pharmaciesonduty.viewmodel.ShowPharmacyViewModel
 
 class ShowPharmacyFragment : Fragment() {
 
@@ -18,14 +18,14 @@ class ShowPharmacyFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var pharmacyAdapter: PharmacyAdapter
     private lateinit var pharmacyList: List<Result>
-    private lateinit var viewModel: ShowParmacyViewModel
+    private lateinit var viewModel: ShowPharmacyViewModel
     private lateinit var mySharedPref: SharedPref
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentShowPharmacyBinding.inflate(inflater,container,false)
+        _binding = FragmentShowPharmacyBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -52,26 +52,35 @@ class ShowPharmacyFragment : Fragment() {
             }
         }
 
-        viewModel = ViewModelProvider(requireActivity()).get(ShowParmacyViewModel::class.java)
-        viewModel.getPharmacyData(province,district)
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.recyclerView.visibility = View.GONE
+            binding.progressBar.visibility = View.VISIBLE
+            binding.textViewError.visibility = View.GONE
+
+            viewModel.getPharmacyData(province, district)
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
+        viewModel = ViewModelProvider(requireActivity()).get(ShowPharmacyViewModel::class.java)
+        viewModel.getPharmacyData(province, district)
 
         observeLiveData()
     }
 
     private fun observeLiveData() {
-        viewModel.variables.observe(viewLifecycleOwner,{ data ->
+        viewModel.variables.observe(viewLifecycleOwner, { data ->
             data?.let {
                 pharmacyList = it
-                pharmacyAdapter = PharmacyAdapter(pharmacyList,this)
+                pharmacyAdapter = PharmacyAdapter(pharmacyList, this)
                 binding.recyclerView.adapter = pharmacyAdapter
                 binding.textViewError.visibility = View.INVISIBLE
                 binding.progressBar.visibility = View.INVISIBLE
                 binding.recyclerView.visibility = View.VISIBLE
             }
         })
-        viewModel.progressBarState.observe(viewLifecycleOwner,{ state ->
+        viewModel.progressBarState.observe(viewLifecycleOwner, { state ->
             state?.let {
-                if (it){
+                if (it) {
                     binding.textViewError.visibility = View.GONE
                     binding.progressBar.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE
@@ -80,9 +89,9 @@ class ShowPharmacyFragment : Fragment() {
                 }
             }
         })
-        viewModel.errorMessageState.observe(viewLifecycleOwner,{ state ->
+        viewModel.errorMessageState.observe(viewLifecycleOwner, { state ->
             state?.let {
-                if (it){
+                if (it) {
                     binding.textViewError.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.GONE
                     binding.recyclerView.visibility = View.GONE
@@ -94,7 +103,7 @@ class ShowPharmacyFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.show_parmacy_menu,menu)
+        inflater.inflate(R.menu.show_parmacy_menu, menu)
     }
 
     override fun onDestroyView() {
